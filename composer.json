@@ -1,7 +1,8 @@
 {
-    "name": "th3mouk/rethinkdb-translator",
-    "type": "project",
-    "license": "MIT",
+  "name": "th3mouk/rethinkdb-translator",
+  "type": "library",
+  "description": "Convert cursor and array objects to associative array",
+  "license": "MIT",
     "authors": [
         {
             "name": "Jérémy Marodon",
