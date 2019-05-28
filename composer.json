@@ -3,24 +3,25 @@
   "type": "library",
   "description": "Convert cursor and array objects to associative array",
   "license": "MIT",
-    "authors": [
-        {
-            "name": "Jérémy Marodon",
-            "email": "marodon.jeremy@gmail.com"
-        }
-    ],
-    "require": {
-        "danielmewes/php-rql": "^2.3"
-    },
-    "require-dev": {
-        "phpro/grumphp": "^0.15.0",
-        "sensiolabs/security-checker": "^5.0",
-        "phpstan/phpstan": "^0.11.5",
-        "youdot/coding-standard": "^1.1"
-    },
-    "autoload": {
-        "psr-4": {
-            "Th3Mouk\\RethinkDB\\Translator\\": "src/"
-        }
+  "authors": [
+    {
+      "name": "Jérémy Marodon",
+      "email": "marodon.jeremy@gmail.com"
     }
+  ],
+  "require": {
+    "danielmewes/php-rql": "^2.3"
+  },
+  "require-dev": {
+    "phpro/grumphp": "^0.15.0",
+    "sensiolabs/security-checker": "^5.0",
+    "phpstan/phpstan": "^0.11.5",
+    "youdot/coding-standard": "^1.1",
+    "phpunit/phpunit": "^8.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Th3Mouk\\RethinkDB\\Translator\\": "src/"
+    }
+  }
 }
