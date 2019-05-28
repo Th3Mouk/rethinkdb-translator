@@ -20,7 +20,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Th3Mouk\\RethinkDB\\Translator\\": ""
+            "Th3Mouk\\RethinkDB\\Translator\\": "src/"
         }
     }
 }
