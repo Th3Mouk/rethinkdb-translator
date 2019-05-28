@@ -23,22 +23,35 @@ class TranslateTest extends TestCase
 
     public function testCanNormalizeDateTimeValues(): void
     {
-        $values = [new \DateTime('2000-05-26T13:30:20+0200')];
+        $values = [new \DateTime('2000-05-26T13:30:20+0000')];
 
-        $this->assertEquals(Translate::normalizeValues($values), ['2000-05-26T13:30:20+0200']);
+        $this->assertEquals(Translate::normalizeValues($values), ['2000-05-26T13:30:20+0000']);
     }
 
     public function testCanNormalizeNestedValues(): void
     {
         $values = [
             new \ArrayObject([
-                'foo' => new \DateTime('2000-05-26T13:30:20+0200'),
+                'foo' => new \DateTime('2000-05-26T13:30:20+0000'),
             ]),
         ];
 
         $this->assertEquals(Translate::normalizeValues($values), [
-            ['foo' => '2000-05-26T13:30:20+0200'],
+            ['foo' => '2000-05-26T13:30:20+0000'],
         ]);
+    }
+
+    public function testCanOverrideDateTimeToStringOption(): void
+    {
+        $values = [new \ArrayObject([
+            'foo' => new \DateTime('2000-05-26T13:30:20+0000'),
+        ]),
+        ];
+
+        $normalized = Translate::normalizeValues($values, ['dateTimeToString' => false]);
+
+        $this->assertInstanceOf(\DateTime::class, $normalized[0]['foo']);
+        $this->assertEquals($normalized[0]['foo']->format(DATE_ISO8601), '2000-05-26T13:30:20+0000');
     }
 
     public function testCanNormalizeNestedArrayObjectInArray(): void
@@ -101,25 +114,25 @@ class TranslateTest extends TestCase
         $mockResult[] = new \ArrayObject([
             'domains' => ['cine.fr'],
             'id' => '46ba3de0-3210-4f7b-aac9-c5176daa0cca',
-            'status_changed_at' => new \DateTime('2000-05-26T13:30:20+0200'),
+            'status_changed_at' => new \DateTime('2000-05-26T13:30:20+0000'),
         ]);
 
         $mockResult[] = new \ArrayObject([
             'domains' => ['nyxinteractive.eu', 'irond.info'],
             'id' => '4640ebcb-48f0-4948-8d5b-93cf08d4249c',
-            'status_changed_at' => new \DateTime('2000-05-27T13:30:20+0200'),
+            'status_changed_at' => new \DateTime('2000-05-27T13:30:20+0000'),
         ]);
 
         $this->assertEquals(Translate::arrayOfArrayObjectToAssociativeArray($mockResult), [
             [
                 'domains' => ['cine.fr'],
                 'id' => '46ba3de0-3210-4f7b-aac9-c5176daa0cca',
-                'status_changed_at' => '2000-05-26T13:30:20+0200',
+                'status_changed_at' => '2000-05-26T13:30:20+0000',
             ],
             [
                 'domains' => ['nyxinteractive.eu', 'irond.info'],
                 'id' => '4640ebcb-48f0-4948-8d5b-93cf08d4249c',
-                'status_changed_at' => '2000-05-27T13:30:20+0200',
+                'status_changed_at' => '2000-05-27T13:30:20+0000',
             ],
         ]);
     }
