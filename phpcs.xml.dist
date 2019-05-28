@@ -21,4 +21,6 @@
     <!-- Directories to be checked -->
     <file>.</file>
     <exclude-pattern>*/vendor/*</exclude-pattern>
+
+
 </ruleset>
