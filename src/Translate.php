@@ -11,12 +11,21 @@ class Translate
     /** @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversableReturnTypeHintSpecification */
     public static function cursorToAssociativeArray(Cursor $cursor): array
     {
-        $objects = $cursor->toArray();
-        array_walk($objects, static function (\ArrayObject &$entry): void {
-            $entry = self::normalizeValues($entry->getArrayCopy());
+        return self::arrayOfArrayObjectToAssociativeArray($cursor->toArray());
+    }
+
+    /**
+     * @param array<\ArrayObject> $arrayOfArrayObject
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversableReturnTypeHintSpecification
+     */
+    public static function arrayOfArrayObjectToAssociativeArray(array $arrayOfArrayObject): array
+    {
+        array_walk($arrayOfArrayObject, static function (\ArrayObject &$entry): void {
+            $entry = self::arrayObjectToAssociativeArray($entry);
         });
 
-        return $objects;
+        return $arrayOfArrayObject;
     }
 
     /** @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversableReturnTypeHintSpecification */

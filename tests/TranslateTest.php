@@ -76,4 +76,34 @@ class TranslateTest extends TestCase
             ],
         ]);
     }
+
+    public function testCanTransformArrayOfArrayObjectToAssociativeArray(): void
+    {
+        $mockResult = [];
+
+        $mockResult[] = new \ArrayObject([
+            'domains' => ['cine.fr'],
+            'id' => '46ba3de0-3210-4f7b-aac9-c5176daa0cca',
+            'status_changed_at' => new DateTime('2000-05-26T13:30:20+0200'),
+        ]);
+
+        $mockResult[] = new \ArrayObject([
+            'domains' => ['nyxinteractive.eu', 'irond.info'],
+            'id' => '4640ebcb-48f0-4948-8d5b-93cf08d4249c',
+            'status_changed_at' => new DateTime('2000-05-27T13:30:20+0200'),
+        ]);
+
+        $this->assertEquals(Translate::arrayOfArrayObjectToAssociativeArray($mockResult), [
+            [
+                'domains' => ['cine.fr'],
+                'id' => '46ba3de0-3210-4f7b-aac9-c5176daa0cca',
+                'status_changed_at' => '2000-05-26T13:30:20+0200',
+            ],
+            [
+                'domains' => ['nyxinteractive.eu', 'irond.info'],
+                'id' => '4640ebcb-48f0-4948-8d5b-93cf08d4249c',
+                'status_changed_at' => '2000-05-27T13:30:20+0200',
+            ],
+        ]);
+    }
 }
