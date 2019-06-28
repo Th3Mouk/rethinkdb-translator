@@ -41,13 +41,11 @@ class Translate
     public static function normalizeValues(array $values): array
     {
         return array_map(static function ($value) {
-            /** @var \ArrayObject $value */
-            if (is_a($value, \ArrayObject::class)) {
-                return self::normalizeValues($value->getArrayCopy());
+            if ($value instanceof \ArrayObject) {
+                return self::arrayObjectToAssociativeArray($value);
             }
 
-            /** @var \DateTime $value */
-            if (is_a($value, \DateTime::class)) {
+            if ($value instanceof \DateTime) {
                 return $value->format(DATE_ISO8601);
             }
 
