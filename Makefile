@@ -13,4 +13,4 @@ test:
 security:
 	vendor/bin/security-checker security:check composer.lock
 
-ci: cs stan security
+ci: cs stan test security
