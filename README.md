@@ -17,10 +17,11 @@ This PHP library providing a simple way to translate the result of `danielmewes/
 
 ## Usage
 
-It exists two transformations:
+It exists three transformations:
 
-- Translate::cursorToAssociativeArray
-- Translate::arrayObjectToAssociativeArray
+- `Translate::cursorToAssociativeArray`
+- `Translate::arrayObjectToAssociativeArray`
+- `Translate::arrayOfArrayObjectToAssociativeArray`
 
 ## Please
 
