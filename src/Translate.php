@@ -45,6 +45,10 @@ class Translate
                 return self::arrayObjectToAssociativeArray($value);
             }
 
+            if (is_array($value)) {
+                return self::normalizeValues($value);
+            }
+
             if ($value instanceof \DateTime) {
                 return $value->format(DATE_ISO8601);
             }

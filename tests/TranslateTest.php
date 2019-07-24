@@ -41,6 +41,21 @@ class TranslateTest extends TestCase
         ]);
     }
 
+    public function testCanNormalizeNestedArrayObjectInArray(): void
+    {
+        $values = [
+            [
+                new \ArrayObject(['foo' => 'bar']),
+            ],
+        ];
+
+        $this->assertEquals(Translate::normalizeValues($values), [
+            [
+                ['foo' => 'bar'],
+            ],
+        ]);
+    }
+
     public function testCanTransformArrayObjectToAssociativeArray(): void
     {
         $ao = new \ArrayObject(['foo' => 'bar']);
